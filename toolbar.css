@@ -151,3 +151,52 @@ html {
     }
   }
  
+
+/* 在原有的 CSS 基础上修改以下内容 */
+
+.toolbar-container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 25em;
+  transition: transform 0.3s ease-in-out;
+}
+
+.toolbar-toggle {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.icon--arrow {
+  width: 28px;
+  height: 28px;
+  fill: #1F1B2C;
+  transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.toolbar-container.collapsed {
+  transform: translate(-50%, 100%);
+}
+
+.toolbar-container.collapsed .icon--arrow {
+  transform: rotate(180deg); /* 当工具栏收起时，箭头旋转180度 */
+}
+
+/* 添加高亮效果 */
+.toolbar-toggle:hover .icon--arrow {
+  fill: #352e4c;
+}
+
+/* 添加轻微放大效果 */
+.toolbar-toggle:hover {
+  transform: translateX(-50%) scale(1.1);
+}
+
+/* 移除旧的 pulse 动画 */

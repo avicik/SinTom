@@ -41,4 +41,38 @@ document.addEventListener('DOMContentLoaded', function() {
             smileIcon.classList.add(position);
         }
     }
+
+    const toolbarContainer = document.querySelector('.toolbar-container');
+    const toolbarToggle = document.querySelector('.toolbar-toggle');
+    const arrowIcon = toolbarToggle.querySelector('.icon--arrow');
+    let isAnimating = false;
+
+    if (toolbarToggle) {
+        toolbarToggle.addEventListener('click', function() {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            toolbarContainer.classList.toggle('collapsed');
+            
+            const transitionEndHandler = function() {
+                isAnimating = false;
+                toolbarContainer.removeEventListener('transitionend', transitionEndHandler);
+            };
+
+            toolbarContainer.addEventListener('transitionend', transitionEndHandler);
+        });
+    } else {
+        console.error('Toolbar toggle element not found');
+    }
+
+    // 鼠标悬停效果
+    toolbarToggle.addEventListener('mouseenter', function() {
+        if (!isAnimating) {
+            arrowIcon.style.animation = 'pulse 0.5s infinite';
+        }
+    });
+
+    toolbarToggle.addEventListener('mouseleave', function() {
+        arrowIcon.style.animation = 'none';
+    });
 });
