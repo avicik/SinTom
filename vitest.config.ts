@@ -9,9 +9,9 @@ export default mergeConfig(
     test: {
       environment: 'jsdom',
       exclude: [...configDefaults.exclude, 'e2e/**'],
-      root: fileURLToPath(new URL('./', import.meta.url))
+      root: fileURLToPath(new URL('./', import.meta.url)),
     },
     plugins: [vue()],
-    base: '/https://github.com/avicik/SinTom/', // 替换为你的 GitHub 仓库名
-  })
+    base: '/SinTom/', // 替换为你的 GitHub 仓库名
+  }),
 )
