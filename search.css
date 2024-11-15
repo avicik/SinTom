@@ -1,0 +1,113 @@
+/* 基本的页面布局设置 */
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* 背景图片设置 */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('your-background-image.jpg');
+    background-size: cover;
+    background-position: center;
+    transition: filter 0.3s ease;
+    z-index: -1;
+}
+
+/* 主要内容区域布局 */
+.main-content {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 搜索输入框容器样式 */
+.container-input {
+    width: 33.33%;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+}
+
+/* 搜索框获得焦点时的容器样式 */
+.container-input:focus-within {
+    width: 50%;
+}
+
+.input {
+    width: calc(100% - 30px); /* 减去左侧图标的宽度和一些额外空间 */
+    padding: 15px 20px 15px 50px;
+    border-radius: 25px;
+    border: none;
+    background-color: white;
+    font-size: 18px;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.input:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.input:focus {
+    outline: none;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.input.typing {
+    background-color: #f3c4fb; /* 输入时搜索框的颜色 */
+}
+
+.container-input svg {
+    position: absolute;
+    left: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    fill: #999;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.container-input:hover svg,
+.container-input:focus-within svg {
+    fill: #9d4edd;
+}
+
+::placeholder {
+    color: #999;
+}
+
+/* 保留原有的所有样式 */
+
+/* 修改占位符的默认样式 */
+.input::placeholder {
+    color: #999;
+    transition: color 0.3s ease; /* 添加颜色过渡效果 */
+}
+
+/* 鼠标悬浮时改变占位符颜色 */
+.container-input:hover .input::placeholder {
+    color: #9d4edd;  /* 鼠标悬浮时，占位符文字变为蓝色/* 使用与图标相同的蓝色 */
+}
+
+/* 聚焦时隐藏占位符 */
+.input:focus::placeholder {
+    color: transparent;
+}
+
+.input:-webkit-autofill,
+.input.typing {
+    background-color: #f3c4fb !important; /* 使用您想要的颜色 */
+    -webkit-box-shadow: 0 0 0 30px #f3c4fb inset !important;
+}

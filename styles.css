@@ -1,0 +1,10 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f3f3f3; /* 浅灰色背景，您可以根据需要调整 */
+    font-family: Arial, sans-serif;
+    padding-bottom: 80px; /* 根据导航组件的高度调整 */
+}
