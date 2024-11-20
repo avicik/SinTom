@@ -38,16 +38,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 示例笔记数据
+    // 示例笔记数据 - 添加更多字段
     const sampleNotes = [
         {
             id: 1,
             title: '示例笔记 1',
-            content: '这是一个示例笔记的内容...',
+            content: '<h2>这是一个示例笔记的内容...</h2><p>这里可以包含富文本内容</p>',
             folder: '所有笔记',
-            date: '2024-01-20'
+            date: '2024-01-20',
+            lastModified: '2024-01-20 14:30'
         },
-        // 添加更多示例笔记...
+        {
+            id: 2,
+            title: '示例笔记 2',
+            content: '<p>另一个笔记的内容</p><ul><li>项目1</li><li>项目2</li></ul>',
+            folder: '所有笔记',
+            date: '2024-01-21',
+            lastModified: '2024-01-21 09:15'
+        }
     ];
 
     // 渲染笔记函数
@@ -65,8 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
         newNoteCard.addEventListener('click', () => {
-            const noteModal = document.getElementById('noteModal');
-            noteModal.style.display = 'block';
+            window.noteEditor.showEditor();
         });
         notesContainer.appendChild(newNoteCard);
         
@@ -101,6 +108,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 `;
             }
+            
+            // 为整个笔记卡片添加点击事件
+            noteElement.addEventListener('click', (e) => {
+                // 如果点击的是操作按钮，不触发笔记打开
+                if (e.target.closest('.note-actions')) {
+                    return;
+                }
+                // 打开笔记编辑器
+                window.noteEditor.showEditor(note);
+            });
+
+            // 为编辑按钮添加单独的点击事件
+            const editBtn = noteElement.querySelector('button[title="编辑"]');
+            editBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // 阻止事件冒泡
+                window.noteEditor.showEditor(note);
+            });
+
+            // 为删除按钮添加点击事件
+            const deleteBtn = noteElement.querySelector('button[title="删除"]');
+            deleteBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // 阻止事件冒泡
+                if (confirm('确定要删除这个笔记吗？')) {
+                    // TODO: 实现删除笔记的逻辑
+                    console.log('删除笔记:', note.id);
+                }
+            });
             
             notesContainer.appendChild(noteElement);
         });
